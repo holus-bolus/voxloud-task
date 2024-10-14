@@ -1,4 +1,5 @@
 
+
 # Weather Dashboard
 
 This is a weather dashboard application built with Angular. It allows users to add multiple cities and view their current weather conditions and 5-day forecasts. The application fetches real-time weather data from the OpenWeatherMap API.
@@ -7,7 +8,7 @@ This is a weather dashboard application built with Angular. It allows users to a
 - Add multiple cities and view the current weather for each.
 - View temperature, weather conditions, and forecast for the next 5 days.
 - Option to remove cities from the dashboard.
-- Persistent storage of cities using localStorage.
+- Persistent storage of cities using LocalStorage.
 - Smooth animations for toggling forecasts.
 - Responsive design suitable for all device sizes.
 
@@ -49,11 +50,24 @@ To fetch weather data, you need to obtain an API key from [OpenWeatherMap](https
 
 ### Step 4: Configure the API Key
 
-Once you have your API key, open the `src/app/services/weather.service.ts` file and add your API key.
+1. Once you have your API key, open the `src/environments/environment.ts` file and add your API key.
 
 ```typescript
-// weather.service.ts
-private apiKey = 'your-openweathermap-api-key';  // Replace with your API key
+// environment.ts
+export const environment = {
+  production: false,
+  openWeatherApiKey: 'your-openweathermap-api-key'  // Replace with your API key
+};
+```
+
+2. Similarly, configure the production environment in `src/environments/environment.prod.ts`.
+
+```typescript
+// environment.prod.ts
+export const environment = {
+  production: true,
+  openWeatherApiKey: 'your-openweathermap-api-key'  // Replace with your API key
+};
 ```
 
 ### Step 5: Run the Application
@@ -95,7 +109,7 @@ The built assets will be stored in the `dist/` directory.
 - **`src/app/components`**: Contains the main components (`app.component.ts`, `dashboard.component.ts`, `weather-card.component.ts`).
 - **`src/app/services`**: Contains the `weather.service.ts` that handles API communication.
 - **`src/assets`**: Contains static assets like images and icons.
-- **`src/environments`**: Contains environment configuration files (e.g., for production).
+- **`src/environments`**: Contains environment configuration files (e.g., for production and development).
 
 ## API Details
 
@@ -109,7 +123,7 @@ The application uses the **OpenWeatherMap API** to fetch current weather and 5-d
   - `q`: City name (e.g., `q=London`)
   - `appid`: Your API key from OpenWeatherMap.
   - `units`: The unit of measurement (e.g., `units=metric` for Celsius).
-  
+
 Example API call:
 ```
 https://api.openweathermap.org/data/2.5/weather?q=London&appid=your_api_key&units=metric
@@ -117,7 +131,7 @@ https://api.openweathermap.org/data/2.5/weather?q=London&appid=your_api_key&unit
 
 ## Troubleshooting
 
-- **API Key Issues**: Ensure that the API key is valid and correctly placed in `weather.service.ts`.
+- **API Key Issues**: Ensure that the API key is valid and correctly placed in the `environment.ts` or `environment.prod.ts` file.
 - **CORS Errors**: If you encounter CORS issues while running locally, ensure you are not using browser extensions that block CORS.
 - **Performance**: If the app slows down with too many cities, consider adding a limit to the number of cities a user can add.
 
@@ -129,4 +143,3 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 - **Tailwind CSS** for responsive and utility-first CSS styling.
 - **Angular** for the robust front-end framework.
 
----
