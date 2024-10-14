@@ -1,27 +1,132 @@
-# VoxloudTask
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.8.
+# Weather Dashboard
 
-## Development server
+This is a weather dashboard application built with Angular. It allows users to add multiple cities and view their current weather conditions and 5-day forecasts. The application fetches real-time weather data from the OpenWeatherMap API.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Features
+- Add multiple cities and view the current weather for each.
+- View temperature, weather conditions, and forecast for the next 5 days.
+- Option to remove cities from the dashboard.
+- Persistent storage of cities using localStorage.
+- Smooth animations for toggling forecasts.
+- Responsive design suitable for all device sizes.
 
-## Code scaffolding
+## Technologies Used
+- **Angular** (v18)
+- **RxJS** for reactive programming and API calls.
+- **Tailwind CSS** for responsive styling.
+- **OpenWeatherMap API** for fetching weather data.
+- **LocalStorage** for persistent city data.
+- **Angular Animations** for smooth UI transitions.
+- **Jasmine/Karma** for unit testing.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Prerequisites
+Before you begin, ensure you have met the following requirements:
+- **Node.js** (v14 or above)
+- **Angular CLI** (v14 or above)
+- **OpenWeatherMap API Key**
 
-## Build
+## Setup Instructions
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Step 1: Clone the Repository
 
-## Running unit tests
+```bash
+git clone https://github.com/yourusername/weather-dashboard.git
+cd weather-dashboard
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Step 2: Install Dependencies
 
-## Running end-to-end tests
+Run the following command to install all required packages:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
+npm install
+```
 
-## Further help
+### Step 3: Obtain OpenWeatherMap API Key
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+To fetch weather data, you need to obtain an API key from [OpenWeatherMap](https://openweathermap.org/api). Sign up for a free account and get your API key.
+
+### Step 4: Configure the API Key
+
+Once you have your API key, open the `src/app/services/weather.service.ts` file and add your API key.
+
+```typescript
+// weather.service.ts
+private apiKey = 'your-openweathermap-api-key';  // Replace with your API key
+```
+
+### Step 5: Run the Application
+
+Run the following command to start the development server:
+
+```bash
+ng serve
+```
+
+By default, the app runs on `http://localhost:4200`. You can open it in your browser to see the weather dashboard.
+
+### Step 6: Running Unit Tests
+
+The project includes unit tests written with Jasmine and Karma. To run the tests, use the following command:
+
+```bash
+ng test
+```
+
+### Optional: Build for Production
+
+To build the app for production, run:
+
+```bash
+ng build --prod
+```
+
+The built assets will be stored in the `dist/` directory.
+
+## Usage
+
+1. **Add a City**: Enter the name of a city in the input field and click the **Add City** button. The city’s current weather and temperature will be displayed.
+2. **View 5-Day Forecast**: Click the **Show Forecast** button to see the forecast for the next 5 days. Click **Hide Forecast** to collapse the forecast section.
+3. **Remove a City**: Click the **Remove** button to delete a city from the dashboard.
+
+## Project Structure
+
+- **`src/app/components`**: Contains the main components (`app.component.ts`, `dashboard.component.ts`, `weather-card.component.ts`).
+- **`src/app/services`**: Contains the `weather.service.ts` that handles API communication.
+- **`src/assets`**: Contains static assets like images and icons.
+- **`src/environments`**: Contains environment configuration files (e.g., for production).
+
+## API Details
+
+The application uses the **OpenWeatherMap API** to fetch current weather and 5-day forecast data.
+
+- **API Base URL**: `https://api.openweathermap.org/data/2.5/`
+- **Endpoints**:
+  - `/weather`: Used to fetch current weather data.
+  - `/forecast`: Used to fetch the 5-day weather forecast.
+- **Query Parameters**:
+  - `q`: City name (e.g., `q=London`)
+  - `appid`: Your API key from OpenWeatherMap.
+  - `units`: The unit of measurement (e.g., `units=metric` for Celsius).
+  
+Example API call:
+```
+https://api.openweathermap.org/data/2.5/weather?q=London&appid=your_api_key&units=metric
+```
+
+## Troubleshooting
+
+- **API Key Issues**: Ensure that the API key is valid and correctly placed in `weather.service.ts`.
+- **CORS Errors**: If you encounter CORS issues while running locally, ensure you are not using browser extensions that block CORS.
+- **Performance**: If the app slows down with too many cities, consider adding a limit to the number of cities a user can add.
+
+## License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Acknowledgements
+- **OpenWeatherMap** for providing the weather data.
+- **Tailwind CSS** for responsive and utility-first CSS styling.
+- **Angular** for the robust front-end framework.
+
+---

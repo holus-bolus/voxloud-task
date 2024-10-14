@@ -1,0 +1,34 @@
+<div class="card bg-white shadow-md rounded-lg p-4 transition-all duration-200 hover:shadow-lg hover:bg-gray-50 transform hover:scale-105">
+  <h3 class="text-lg font-bold">{{ city.city }}</h3>
+  <p class="text-sm">Temperature: {{ city.temp }}°C</p>
+  <p class="text-sm">Condition: {{ city.condition }}</p>
+
+  <button
+    (click)="removeCity()"
+    class="mt-4 bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 transition-all duration-200 transform hover:scale-105"
+  >
+    Remove
+  </button>
+
+  <button
+    (click)="toggleForecast()"
+    class="mt-4 ml-2 bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200 transform hover:scale-105"
+  >
+    {{ showForecast ? 'Hide' : 'Show' }} Forecast
+  </button>
+
+  <div *ngIf="isForecastLoading" class="mt-4">Loading forecast...</div>
+
+  <div
+    *ngIf="!isForecastLoading"
+    [@toggleForecast]="showForecast ? 'open' : 'closed'"
+    class="forecast mt-4 overflow-hidden"
+  >
+    <h4 class="text-md font-semibold">5-Day Forecast</h4>
+    <div *ngFor="let day of forecast" class="forecast-day mt-2">
+      <p><strong>{{ day.date }}</strong>: {{ day.temp }}°C, {{ day.condition }}</p>
+    </div>
+  </div>
+
+  <p *ngIf="error" class="text-red-600 mt-2">{{ error }}</p>
+</div>
